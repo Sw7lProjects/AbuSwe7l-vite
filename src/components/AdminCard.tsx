@@ -29,9 +29,7 @@ const adminsData = {
     image:
       "https://cdn.discordapp.com/avatars/1105670596525834250/1630f31bd65afe567a2057644cc24ad2.png?size=1024&format=webp&width=768&height=768",
     socialLinks: {
-      twitter: "https://twitter.com/0xReLaX",
       github: "hhttps://github.com/RlxChap2",
-      linkedin: "https://linkedin.com",
     },
   },
   iQMusa: {
@@ -40,15 +38,12 @@ const adminsData = {
     socialLinks: {
       twitter: "https://twitter.com/iQMusa",
       github: "https://github.com/iQMusa",
-      linkedin: "https://linkedin.com",
     },
   },
   "1hzg": {
     image:
       "https://cdn.discordapp.com/avatars/920681692480548865/0a21b159e1c25a4981054224ed92cb60.png?size=1024&format=webp&width=768&height=768",
     socialLinks: {
-      twitter: "https://twitter.com/1hzg",
-      linkedin: "https://linkedin.com",
     },
   },
   Nelly: {
@@ -56,7 +51,6 @@ const adminsData = {
       "https://cdn.discordapp.com/avatars/1253080384879595663/44ba898678fcf4f45a710ae42a3f226f.png?size=1024&format=webp&width=768&height=768",
     socialLinks: {
       twitter: "https://twitter.com/Nelly",
-      linkedin: "https://linkedin.com",
     },
   },
 };

@@ -3,7 +3,8 @@
   "nav": {
     "home": "Home",
     "terms": "Terms & Conditions",
-    "admins": "Admins"
+    "admins": "Admins",
+     "login": "Login"
   },
   "hero": {
     "status": "Live on Kick",
