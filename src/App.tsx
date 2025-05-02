@@ -9,7 +9,8 @@ import AdminInfo from "./pages/AdminInfo";
 import TermsConditions from "./pages/TermsConditions";
 import NotFound from "./pages/NotFound";
 import './i18n';
-
+import Dashboard from "./pages/Dashboard";
+import UserDetails from "./pages/UserDetails";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -21,6 +22,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/admin-info" element={<AdminInfo />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/users/:id" element={<UserDetails />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

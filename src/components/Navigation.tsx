@@ -28,6 +28,7 @@ const Navigation: React.FC = () => {
     { path: "/", label: t("nav.home") },
     { path: "/terms-conditions", label: t("nav.terms") },
     { path: "/admin-info", label: t("nav.admins") },
+    { path: "/Dashboard", label: t("Dashboard") },
     { path: "/", label: t("nav.login") },
   ];
 
