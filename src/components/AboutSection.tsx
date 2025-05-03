@@ -1,110 +1,95 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
-const useCountUp = (target: number, duration: number = 2000) => {
-  const [count, setCount] = useState(0);
+import {
+  FaYoutube,
+  FaTiktok,
+  FaInstagram,
+  FaTwitter,
+  FaSnapchatGhost,
+  FaKickstarterK,
+  FaDiscord,
+  FaWhatsapp,
+  FaPaypal,
+  FaMoneyBillWave,
+} from "react-icons/fa";
 
-  useEffect(() => {
-    let start: number | null = null;
+const SocialButton = ({ icon: Icon, label, href, color }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`flex items-center gap-3 px-5 py-3 rounded-full text-white font-medium transition-all transform hover:scale-110 shadow-xl ${color}`}
+  >
+    <Icon size={24} />
+    <span className="text-lg">{label}</span>
+  </a>
+);
 
-    const step = (timestamp: number) => {
-      if (!start) start = timestamp;
-      const progress = timestamp - start;
-      const progressRatio = Math.min(progress / duration, 1);
-      const current = Math.floor(progressRatio * target);
-      setCount(current);
-
-      if (progress < duration) {
-        requestAnimationFrame(step);
-      } else {
-        setCount(target);
-      }
-    };
-
-    requestAnimationFrame(step);
-  }, [target, duration]);
-
-  return count;
-};
-
-//  تنسيق الأرقام إلى K
-const formatK = (number: number): string => {
-  return `${Math.floor(number)}K`;
-};
-
-const AboutSection: React.FC = () => {
-  const { t, i18n } = useTranslation();
-  const heading = t("about.heading");
-  const bio1 = t("about.bio1");
-  const bio2 = t("about.bio2");
-  const badge = t("about.badge");
-  const cards = t("about.cards", { returnObjects: true }) as Array<{ title: string; text: string }>;
-
-  const subscribersTarget = 344;
-  const discordMembersTarget = 22;
-
-  const subscribers = useCountUp(subscribersTarget, 2000);
-  const discordMembers = useCountUp(discordMembersTarget, 2000);
+const AboutSection = () => {
+  const { t } = useTranslation();
 
   return (
-    <section id="about" className="py-24 text-white">
-      <div className="container grid grid-cols-1 md:grid-cols-2 gap-16 items-center px-6">
-
-        {/*  الشعار والإحصائيات */}
-        <div className="flex flex-col items-center space-y-6">
-          <div className="relative flex flex-col items-center">
+    <section className="min-h-screen bg-gradient-to-br from-[#111111] to-[#111111] text-white flex items-center justify-center px-8 py-20">
+      <div className="max-w-7xl w-full grid md:grid-cols-2 gap-16 items-center">
+        <div className="flex flex-col items-center text-center space-y-8">
+          <div className="relative">
             <img
               src="https://yt3.googleusercontent.com/6skf3aJYTrBh2Vz5MZ2qXaRvjUCxjkHtwZCTCTfSMZ95eSf7uPsDhdefIMGkyEHQeIPF474gIA=s900-c-k-c0x00ffffff-no-rj"
-              alt="AbuSwe7l Logo"
-              className="w-40 h-40 rounded-full object-cover border-4 border-pink-500 animate-spin-slow shadow-lg"
+              alt="AbuSwe7l"
+              className="w-48 h-48 rounded-full border-4 border-pink-600 shadow-xl animate-spin-slow"
             />
-            <div className="absolute -bottom-4">
-              <Badge className="bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-md">{badge}</Badge>
+            <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-500 px-4 py-1 text-sm rounded-full">
+              {t("about.badge")}
+            </span>
+          </div>
+
+          <h1 className="text-4xl font-extrabold text-pink-500">AbuSwe7l</h1>
+          <p className="text-md text-gray-400">{t("about.Content")}</p>
+
+          <div className="flex gap-8 mt-4">
+            <div className="bg-white/5 px-6 py-3 rounded-xl text-center">
+              <p className="text-pink-400 font-semibold">{t("about.subscribersTitle")}</p>
+              <p className="text-2xl font-bold">344K</p>
+            </div>
+            <div className="bg-white/5 px-6 py-3 rounded-xl text-center">
+              <p className="text-blue-400 font-semibold">{t("about.discordTitle")}</p>
+              <p className="text-2xl font-bold">22K</p>
             </div>
           </div>
 
-          <h3 className="text-3xl font-bold text-pink-400">AbuSwe7l</h3>
-          <p className="text-sm text-gray-300">Saudi Arabian Content Creator</p>
+          <p className="text-white mt-6">{t("about.follow")}❤️</p>
 
-          <div className="grid grid-cols-2 gap-4 w-full max-w-xs mt-4">
-            <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-md shadow-lg text-center">
-              <h4 className="text-pink-400 font-semibold mb-1">{t("about.subscribersTitle", "المشتركين")}</h4>
-              <p className="text-lg font-bold">{formatK(subscribers)}</p>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-md shadow-lg text-center">
-              <h4 className="text-blue-400 font-semibold mb-1">{t("about.discordTitle", "أعضاء الديسكورد")}</h4>
-              <p className="text-lg font-bold">{formatK(discordMembers)}</p>
-            </div>
+          <div className="grid grid-cols-3 gap-5 w-full justify-center">
+            <SocialButton icon={FaYoutube} label="YouTube" href="#" color="bg-red-600" />
+            <SocialButton icon={FaTiktok} label="TikTok" href="#" color="bg-black" />
+            <SocialButton icon={FaInstagram} label="Instagram" href="#" color="bg-gradient-to-r from-pink-500 to-yellow-500" />
+            <SocialButton icon={FaTwitter} label="Twitter" href="#" color="bg-blue-500" />
+            <SocialButton icon={FaSnapchatGhost} label="Snapchat" href="#" color="bg-yellow-400 text-black" />
+            <SocialButton icon={FaKickstarterK} label="Kick" href="#" color="bg-green-600" />
+            <SocialButton icon={FaDiscord} label="Discord" href="#" color="bg-indigo-600" />
+            <SocialButton icon={FaWhatsapp} label="WhatsApp" href="#" color="bg-green-500" />
+          </div>
+
+          <div className="flex gap-5 mt-6">
+            <SocialButton icon={FaPaypal} label="PayPal" href="#" color="bg-blue-600" />
+            <SocialButton icon={FaMoneyBillWave} label="ABN Pay" href="#" color="bg-purple-700" />
           </div>
         </div>
 
-        {/*  المحتوى */}
-        <div>
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-400 to-blue-400">
-              {heading}
-            </h2>
-            
-          </div>
+        <div className="text-left">
+          <h2 className="text-5xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-400 to-blue-400">
+            {t("about.heading")}
+          </h2>
+          <p className="text-gray-300 mb-6 leading-relaxed">{t("about.bio1")}</p>
+          <p className="text-gray-400 mb-8 leading-relaxed">{t("about.bio2")}</p>
 
-          <p className="text-gray-300 mb-4 leading-relaxed">{bio1}</p>
-          <p className="text-gray-400 mb-6 leading-relaxed">{bio2}</p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {cards.map((card, idx) => (
-              <Card
-                key={idx}
-                className="bg-white/5 border border-white/10 backdrop-blur-md shadow hover:scale-[1.03] transition"
-              >
-                <CardHeader>
-                  <CardTitle className="text-white text-lg">{card.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-300">{card.text}</p>
-                </CardContent>
-              </Card>
+          <div className="grid sm:grid-cols-2 gap-6">
+            {t("about.cards", { returnObjects: true }).map((card, idx) => (
+              <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md shadow-xl">
+                <h3 className="text-white font-semibold mb-2">{card.title}</h3>
+                <p className="text-sm text-gray-300">{card.text}</p>
+              </div>
             ))}
           </div>
         </div>

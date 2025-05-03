@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
         </div>
 
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-400 drop-shadow-md">
-          {t("hero.title")}
+        AbuSwe7l Gaming
         </h1>
 
         <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-gray-300" dangerouslySetInnerHTML={{ __html: t("hero.subtitle") }} />
