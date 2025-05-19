@@ -35,7 +35,7 @@ const UserDetails = () => {
         <div className="flex-1 flex justify-center items-center">
           <div className="text-center p-4 sm:p-6 card-primary">
             <h2 className="text-2xl sm:text-3xl font-semibold text-gradient mb-4">❌ User not found</h2>
-            <Link to="/dashboard" className="text-[#ff3d00] hover:text-[#ff6d00] transition duration-200">
+            <Link to="/dashboard" className="text-[#3b82f6] hover:text-[#60a5fa] transition duration-200">
               Back to Dashboard
             </Link>
           </div>
@@ -61,7 +61,7 @@ const UserDetails = () => {
             <img
               src={avatarUrl}
               alt="User Avatar"
-              className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full border-4 border-[#ff3d00] shadow-lg hover:shadow-[#ff3d00]/20 transition-all duration-300"
+              className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full border-4 border-[#3b82f6] shadow-lg hover:shadow-[#3b82f6]/20 transition-all duration-300"
             />
           </div>
 
@@ -96,7 +96,7 @@ const UserDetails = () => {
 };
 
 const InfoItem = ({ label, value }: { label: string; value: string | number }) => (
-  <div className="bg-gradient-to-br from-[#ff3d00]/10 to-[#ff6d00]/10 rounded-lg p-3 sm:p-4">
+  <div className="bg-gradient-to-br from-[#3b82f6]/10 to-[#5a6cff]/10 rounded-lg p-3 sm:p-4">
     <span className="font-semibold text-gradient text-sm sm:text-base">{label}:</span>
     <span className="ml-2 text-white text-sm sm:text-base">{value}</span>
   </div>
