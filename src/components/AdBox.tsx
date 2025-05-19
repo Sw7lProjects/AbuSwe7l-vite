@@ -62,8 +62,8 @@ const AdBox = ({
       )}
       {showButton && (
         <button
+          className="fixed bottom-6 right-6 z-[9999] bg-gradient-to-r from-[#3b82f6] to-[#5a6cff] text-white rounded-full shadow-lg p-3 hover:scale-110 transition-all"
           onClick={handleShow}
-          className="fixed top-6 right-6 z-[9999] bg-gradient-to-r from-[#3b82f6] to-[#5a6cff] text-white rounded-full shadow-lg p-3 hover:scale-110 transition-all"
           aria-label="Show Ads"
         >
           <Megaphone className="w-6 h-6" />
