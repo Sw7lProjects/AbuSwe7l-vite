@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Monitor, Users, FileText, ArrowRight } from 'lucide-react';
@@ -8,14 +7,14 @@ import AboutSection from '@/components/AboutSection';
 import StreamSection from '@/components/StreamSection';
 import Footer from '@/components/Footer';
 import Testimonials from '@/components/Testimonials';
-import '../i18n'; 
-
+import MainAdsSection from '@/components/MainAdsSection';
 
 const Index: React.FC = () => {
   return (
     <>
     <Navigation />
     <Hero />
+    <MainAdsSection />
     <AboutSection />
     <StreamSection />
     <Testimonials />

@@ -1,128 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Monitor, Menu, X, Globe } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import React from "react";
+import { Link } from "react-router-dom";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/terms-conditions", label: "Terms & Conditions" },
+  { href: "/admin-info", label: "Admins" },
+  { href: "/dashboard", label: "Dashboard" },
+  { href: "/login", label: "Login" },
+];
 
 const Navigation: React.FC = () => {
-  const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  // i18n
-  const { t, i18n } = useTranslation();
-  const [lang, setLang] = useState<string>(i18n.language);
-
-  const toggleLanguage = () => {
-    const next = lang === "en" ? "ar" : "en";
-    i18n.changeLanguage(next);
-    setLang(next);
-  };
-
-  // اضبط اتجاه الصفحة تلقائياً عند تغيير اللغة
-  useEffect(() => {
-    document.body.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
-  }, [lang]);
-
-  const isActive = (path: string) => location.pathname === path;
-
-  const navLinks = [
-    { path: "/", label: t("nav.home") },
-    { path: "/terms-conditions", label: t("nav.terms") },
-    { path: "/admin-info", label: t("nav.admins") },
-    { path: "/Dashboard", label: t("Dashboard") },
-    { path: "/", label: t("nav.login") },
-  ];
-
   return (
-    <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] md:w-[70%] lg:w-[60%]">
-      <div
-        className="px-6 py-4 shadow-xl backdrop-blur-md transition-all duration-300 flex items-center justify-between"
-        style={{
-          borderRadius: "9999px",
-          background: "rgba(17, 24, 39, 0.7)",
-          border: "1px solid rgba(255, 255, 255, 0.1)",
-        }}
+    <header className="w-full flex justify-center mt-4">
+      <nav
+        className="w-full max-w-6xl flex items-center justify-between px-6 py-2 bg-background-dark/70 rounded-2xl border-2 border-primary shadow-[0_0_16px_2px_#0066ffcc]"
+        style={{ boxShadow: "0 0 16px 2px #0066ffcc" }}
       >
-        {/* Logo */}
-        <div className="flex items-center space-x-3 rtl:space-x-reverse">
+        {/* Logo and Site Name */}
+        <Link to="/" className="flex items-center space-x-3 group">
           <img
-            src="https://cdn.discordapp.com/avatars/1275574902736424971/80c19f39d0d484c5694658466ea36a2d.webp?size=4096"
-            alt="Logo"
-            className="w-6 h-6"
+            src="https://yt3.googleusercontent.com/6skf3aJYTrBh2Vz5MZ2qXaRvjUCxjkHtwZCTCTfSMZ95eSf7uPsDhdefIMGkyEHQeIPF474gIA=s900-c-k-c0x00ffffff-no-rj"
+            alt="AbuSwe7l Logo"
+            className="w-12 h-12 rounded-full border-2 border-primary shadow-[0_0_8px_2px_#0066ffcc] bg-background-dark"
           />
-          <a className="text-xl font-bold tracking-tight">AbuSwe7l</a>
-        </div>
-
-        {/* Desktop Navigation + Language Switch */}
-        <div className="hidden md:flex items-center space-x-6 rtl:space-x-reverse">
+          <span className="text-3xl font-extrabold text-white font-serif tracking-wide select-none group-hover:text-primary transition-colors duration-200">
+            AbuSwe7l
+          </span>
+        </Link>
+        {/* Navigation Links */}
+        <ul className="flex items-center space-x-8">
           {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`text-sm font-medium transition-colors ${
-                isActive(link.path)
-                  ? "text-purple-400"
-                  : "text-gray-300 hover:text-white"
-              }`}
-            >
-              {link.label}
-            </Link>
+            <li key={link.href}>
+              <Link
+                to={link.href}
+                className="relative text-white font-bold text-lg transition-all duration-200 select-none group"
+              >
+                <span className="group-hover:text-primary group-hover:scale-110 transition-all duration-200 inline-block">
+                  {link.label}
+                  <span className="block h-0.5 bg-gradient-to-r from-primary to-primary-dark rounded-full transition-all duration-300 w-0 group-hover:w-full mt-1"></span>
+                </span>
+              </Link>
+            </li>
           ))}
-
-          {/* زر تبديل اللغة */}
-          <button
-            onClick={toggleLanguage}
-            className="flex items-center text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-teal-500 hover:from-teal-500 hover:to-blue-500 rounded-full py-2 px-4 transition-all duration-300 ease-in-out shadow-lg transform hover:scale-105"
-          >
-            <Globe className="w-5 h-5 mr-3 transition-transform duration-300 transform hover:rotate-180" />
-            <span>{lang === "en" ? t("switch") : t("switch")}</span>
-          </button>
-        </div>
-
-        {/* Mobile Menu Toggle */}
-        <div className="flex items-center">
-          {/* زر تبديل اللغة على الموبايل */}
-          <button
-            onClick={toggleLanguage}
-            className="md:hidden text-gray-300 hover:text-white mr-4"
-          >
-            <Globe className="w-6 h-6" />
-          </button>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-white"
-          >
-            {menuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Navigation */}
-      <div
-        className={`md:hidden transition-all duration-300 ease-in-out mt-2 bg-gray-900/80 border border-gray-700 py-4 px-6 space-y-4 rounded-xl shadow-md backdrop-blur transform ${
-          menuOpen
-            ? "scale-100 opacity-100"
-            : "scale-95 opacity-0 pointer-events-none"
-        }`}
-      >
-        {navLinks.map((link) => (
-          <Link
-            key={link.path}
-            to={link.path}
-            onClick={() => setMenuOpen(false)}
-            className={`block text-sm font-medium ${
-              isActive(link.path)
-                ? "text-purple-400"
-                : "text-gray-300 hover:text-white"
-            }`}
-          >
-            {link.label}
-          </Link>
-        ))}
-      </div>
+        </ul>
+      </nav>
     </header>
   );
 };

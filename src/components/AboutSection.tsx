@@ -1,100 +1,179 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+import { Youtube, Instagram, Twitter, MessageCircle, Send } from "lucide-react";
+import { SiTiktok, SiSnapchat, SiDiscord } from "react-icons/si";
+import { Link } from 'react-router-dom';
 
-import {
-  FaYoutube,
-  FaTiktok,
-  FaInstagram,
-  FaTwitter,
-  FaSnapchatGhost,
-  FaKickstarterK,
-  FaDiscord,
-  FaWhatsapp,
-  FaPaypal,
-  FaMoneyBillWave,
-} from "react-icons/fa";
+const AboutSection: React.FC = () => {
+  const socialLinks = [
+    { icon: Youtube, href: "https://www.youtube.com/@AbuSwe7l", label: "YouTube", bg: "bg-gradient-to-br from-[#23242a] to-[#181a1f] hover:from-[#2a2c33] hover:to-[#1f2127]" },
+    { icon: SiTiktok, href: "https://www.tiktok.com/@abuswe7ll", label: "TikTok", bg: "bg-gradient-to-br from-[#23242a] to-[#181a1f] hover:from-[#2a2c33] hover:to-[#1f2127]" },
+    { icon: Instagram, href: "https://www.instagram.com/abuswe7l?igsh=MWZvbmFjeTE4dWd1cw==", label: "Instagram", bg: "bg-gradient-to-br from-[#23242a] to-[#181a1f] hover:from-[#2a2c33] hover:to-[#1f2127]" },
+    { icon: Twitter, href: "https://x.com/ASwe7l", label: "Twitter", bg: "bg-gradient-to-br from-[#23242a] to-[#181a1f] hover:from-[#2a2c33] hover:to-[#1f2127]" },
+    { icon: SiSnapchat, href: "https://www.snapchat.com/add/abuswe7l", label: "Snapchat", bg: "bg-gradient-to-br from-[#23242a] to-[#181a1f] hover:from-[#2a2c33] hover:to-[#1f2127]" },
+    { icon: Send, href: "https://kick.com/abuswe7l", label: "Kick", bg: "bg-gradient-to-br from-[#23242a] to-[#181a1f] hover:from-[#2a2c33] hover:to-[#1f2127]" },
+    { icon: SiDiscord, href: "https://discord.gg/vx4UczGd", label: "Discord", bg: "bg-gradient-to-br from-[#23242a] to-[#181a1f] hover:from-[#2a2c33] hover:to-[#1f2127]" },
+    { icon: MessageCircle, href: "https://www.whatsapp.com/channel/0029Valjotc8fewjWURDUS3l", label: "WhatsApp", bg: "bg-gradient-to-br from-[#23242a] to-[#181a1f] hover:from-[#2a2c33] hover:to-[#1f2127]" },
+  ];
 
-const SocialButton = ({ icon: Icon, label, href, color }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className={`flex items-center gap-3 px-5 py-3 rounded-full text-white font-medium transition-all transform hover:scale-110 shadow-xl ${color}`}
-  >
-    <Icon size={24} />
-    <span className="text-lg">{label}</span>
-  </a>
-);
-
-const AboutSection = () => {
-  const { t } = useTranslation();
+  const paymentLinks = [
+    { href: "https://streamlabs.com/abuswe7l/tip", label: "PayPal", bg: "bg-gradient-to-br from-[#23242a] to-[#181a1f] hover:from-[#2a2c33] hover:to-[#1f2127]" },
+    { href: "https://abnpay.co/s/NALJHe", label: "ABN Pay", bg: "bg-gradient-to-br from-[#23242a] to-[#181a1f] hover:from-[#2a2c33] hover:to-[#1f2127]" },
+  ];
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-[#111111] to-[#111111] text-white flex items-center justify-center px-8 py-20">
-      <div className="max-w-7xl w-full grid md:grid-cols-2 gap-16 items-center">
-        <div className="flex flex-col items-center text-center space-y-8">
-          <div className="relative">
-            <img
-              src="https://yt3.googleusercontent.com/6skf3aJYTrBh2Vz5MZ2qXaRvjUCxjkHtwZCTCTfSMZ95eSf7uPsDhdefIMGkyEHQeIPF474gIA=s900-c-k-c0x00ffffff-no-rj"
-              alt="AbuSwe7l"
-              className="w-48 h-48 rounded-full border-4 border-pink-600 shadow-xl animate-spin-slow"
-            />
-            <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-500 px-4 py-1 text-sm rounded-full">
-              {t("about.badge")}
-            </span>
-          </div>
+    <motion.section
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
+      className="py-20 bg-gradient-to-br from-[#1e293b] to-[#23242a] relative overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(35,36,42,0.10),transparent_60%)] pointer-events-none" />
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+          className="text-center mb-12"
+        >
+          <h2 className="section-title text-transparent bg-clip-text bg-gradient-to-b from-[#60a5fa] to-[#1e40af] drop-shadow-lg">About AbuSwe7l</h2>
+          <p className="section-subtitle text-gray-200 drop-shadow">Discover the story behind your favorite gaming and streaming platform</p>
+        </motion.div>
 
-          <h1 className="text-4xl font-extrabold text-pink-500">AbuSwe7l</h1>
-          <p className="text-md text-gray-400">{t("about.Content")}</p>
-
-          <div className="flex gap-8 mt-4">
-            <div className="bg-white/5 px-6 py-3 rounded-xl text-center">
-              <p className="text-pink-400 font-semibold">{t("about.subscribersTitle")}</p>
-              <p className="text-2xl font-bold">344K</p>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
+          className="modern-card bg-gradient-to-br from-[#23242a] to-[#181a1f] border border-gray-700/40"
+        >
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-[#60a5fa] to-[#1e40af] mb-4 drop-shadow-lg">
+                About AbuSwe7l
+              </h3>
+              <p className="text-gray-100 text-lg mb-6 max-w-xl drop-shadow">
+              AbuSwe7l is a professional streamer and content creator from Saudi Arabia. Known for his passion and community spirit, he's one of the region's top streamers.",
+              As a member of Clan Power, he participates in top-tier tournaments and collaborations, sharing epic moments with fans around the world.
+              </p>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center text-white/90">
+                  <span className="w-4 h-4 rounded-full bg-gradient-to-br from-[#23242a] to-[#181a1f] mr-3 shadow-glow flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">✓</span>
+                  </span>
+                  Daily live streams of popular games
+                </li>
+                <li className="flex items-center text-white/90">
+                  <span className="w-4 h-4 rounded-full bg-gradient-to-br from-[#23242a] to-[#181a1f] mr-3 shadow-glow flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">✓</span>
+                  </span>
+                  Active community of players and followers
+                </li>
+                <li className="flex items-center text-white/90">
+                  <span className="w-4 h-4 rounded-full bg-gradient-to-br from-[#23242a] to-[#181a1f] mr-3 shadow-glow flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">✓</span>
+                  </span>
+                  24/7 technical support
+                </li>
+                <li className="flex items-center text-white/90">
+                  <span className="w-4 h-4 rounded-full bg-gradient-to-br from-[#23242a] to-[#181a1f] mr-3 shadow-glow flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">✓</span>
+                  </span>
+                  Exciting tournaments and valuable prizes
+                </li>
+              </ul>
+              <Link to="/about-abuswe7l" className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-[#3b82f6] to-[#2563eb] text-white font-bold text-lg shadow hover:from-[#60a5fa] hover:to-[#3b82f6] hover:shadow-lg transition-all duration-300">
+                Learn More About Us
+              </Link>
             </div>
-            <div className="bg-white/5 px-6 py-3 rounded-xl text-center">
-              <p className="text-blue-400 font-semibold">{t("about.discordTitle")}</p>
-              <p className="text-2xl font-bold">22K</p>
+            <div className="relative">
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="relative w-full aspect-square rounded-2xl overflow-hidden group"
+              >
+                <img
+                  src="https://cdn.discordapp.com/avatars/1275574902736424971/80c19f39d0d484c5694658466ea36a2d.webp?size=4096"
+                  alt="AbuSwe7l Gaming"
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background-dark/60 to-transparent mix-blend-overlay group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-500"></div>
+                <div className="absolute inset-0 border-4 border-primary/30 rounded-2xl group-hover:border-primary/50 transition-all duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-background-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="absolute -bottom-4 -right-4 bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-full text-sm font-semibold shadow-glow hover:shadow-glow-lg transition-all duration-300"
+              >
+                <span className="flex items-center">
+                  <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
+                  Verified Creator
+                </span>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+                className="absolute -top-4 -left-4 bg-gradient-to-r from-primary to-accent text-white px-4 py-1 rounded-full text-xs font-medium shadow-glow"
+              >
+                Clan Power Member
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          <div className="modern-card bg-gradient-to-br from-[#23242a] to-[#181a1f] border border-gray-700/40">
+            <h4 className="text-xl font-semibold text-gradient mb-4">Social Media AbuSwe7l</h4>
+            <div className="grid grid-cols-4 gap-4">
+              {socialLinks.map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center justify-center p-3 rounded-lg bg-gradient-to-br from-[#3b82f6] to-[#2563eb] text-white border border-[#2563eb] hover:from-[#60a5fa] hover:to-[#3b82f6] hover:shadow-lg transition-all duration-300`}
+                  whileHover={{ scale: 1.1, boxShadow: "0 0 20px rgba(90,108,255,0.3)" }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <social.icon className="w-6 h-6" />
+                </motion.a>
+              ))}
             </div>
           </div>
 
-          <p className="text-white mt-6">{t("about.follow")}❤️</p>
-
-          <div className="grid grid-cols-3 gap-5 w-full justify-center">
-            <SocialButton icon={FaYoutube} label="YouTube" href="#" color="bg-red-600" />
-            <SocialButton icon={FaTiktok} label="TikTok" href="#" color="bg-black" />
-            <SocialButton icon={FaInstagram} label="Instagram" href="#" color="bg-gradient-to-r from-pink-500 to-yellow-500" />
-            <SocialButton icon={FaTwitter} label="Twitter" href="#" color="bg-blue-500" />
-            <SocialButton icon={FaSnapchatGhost} label="Snapchat" href="#" color="bg-yellow-400 text-black" />
-            <SocialButton icon={FaKickstarterK} label="Kick" href="#" color="bg-green-600" />
-            <SocialButton icon={FaDiscord} label="Discord" href="#" color="bg-indigo-600" />
-            <SocialButton icon={FaWhatsapp} label="WhatsApp" href="#" color="bg-green-500" />
+          <div className="modern-card bg-gradient-to-br from-[#23242a] to-[#181a1f] border border-gray-700/40">
+            <h4 className="text-xl font-semibold text-gradient mb-4">Payment Methods</h4>
+            <div className="grid grid-cols-2 gap-4">
+              {paymentLinks.map((payment) => (
+                <motion.a
+                  key={payment.label}
+                  href={payment.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center justify-center p-4 rounded-lg bg-gradient-to-br from-[#3b82f6] to-[#2563eb] text-white border border-[#2563eb] hover:from-[#60a5fa] hover:to-[#3b82f6] hover:shadow-lg transition-all duration-300`}
+                  whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(90,108,255,0.3)" }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {payment.label}
+                </motion.a>
+              ))}
+            </div>
           </div>
-
-          <div className="flex gap-5 mt-6">
-            <SocialButton icon={FaPaypal} label="PayPal" href="#" color="bg-blue-600" />
-            <SocialButton icon={FaMoneyBillWave} label="ABN Pay" href="#" color="bg-purple-700" />
-          </div>
-        </div>
-
-        <div className="text-left">
-          <h2 className="text-5xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-400 to-blue-400">
-            {t("about.heading")}
-          </h2>
-          <p className="text-gray-300 mb-6 leading-relaxed">{t("about.bio1")}</p>
-          <p className="text-gray-400 mb-8 leading-relaxed">{t("about.bio2")}</p>
-
-          <div className="grid sm:grid-cols-2 gap-6">
-            {t("about.cards", { returnObjects: true }).map((card, idx) => (
-              <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md shadow-xl">
-                <h3 className="text-white font-semibold mb-2">{card.title}</h3>
-                <p className="text-sm text-gray-300">{card.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

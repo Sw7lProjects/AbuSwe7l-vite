@@ -1,143 +1,71 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Badge } from "flowbite-react"; // مكتبة البادج مع أيقونة
-import { Star } from "lucide-react"; // أيقونة lucide
-import { FaTwitter, FaGithub, FaLinkedin } from "react-icons/fa"; // أيقونات تويتر وجيتهاب
+import React from 'react';
+import { Shield, Award, Star, Code, Users, Crown } from 'lucide-react';
 
 interface AdminCardProps {
   name: string;
+  role: string;
+  description: string;
+  imageUrl?: string;
 }
 
-const adminsData = {
-  Saad: {
-    image:
-      "https://cdn.discordapp.com/avatars/1107071123738333224/c3cf04eac51014a32a55596138b38567.png?size=1024&format=webp&width=768&height=768",
-    socialLinks: {
-      twitter: "https://twitter.com/Saad",
-      linkedin: "https://linkedin.com",
-    },
-  },
-  "SA7 | MoaTaz": {
-    image:
-      "https://cdn.discordapp.com/avatars/700903797228175391/857f8522e4ef5ac64465b9d48c4f9c63.png?size=1024&format=webp&width=768&height=768",
-    socialLinks: {
-      twitter: "https://twitter.com/MoaTaz",
-      linkedin: "https://linkedin.com",
-    },
-  },
-  "!? 0xReLaX": {
-    image:
-      "https://cdn.discordapp.com/avatars/1105670596525834250/1630f31bd65afe567a2057644cc24ad2.png?size=1024&format=webp&width=768&height=768",
-    socialLinks: {
-      github: "hhttps://github.com/RlxChap2",
-    },
-  },
-  iQMusa: {
-    image:
-      "https://cdn.discordapp.com/avatars/778681849836208148/fad0446c67f9a0a2400737b4d09f0af5.png?size=1024&format=webp&width=768&height=768",
-    socialLinks: {
-      twitter: "https://twitter.com/iQMusa",
-      github: "https://github.com/iQMusa",
-    },
-  },
-  "1hzg": {
-    image:
-      "https://cdn.discordapp.com/avatars/920681692480548865/0a21b159e1c25a4981054224ed92cb60.png?size=1024&format=webp&width=768&height=768",
-    socialLinks: {
-    },
-  },
-  Nelly: {
-    image:
-      "https://cdn.discordapp.com/avatars/1253080384879595663/44ba898678fcf4f45a710ae42a3f226f.png?size=1024&format=webp&width=768&height=768",
-    socialLinks: {
-      twitter: "https://twitter.com/Nelly",
-    },
-  },
+const getRoleIcon = (role: string) => {
+  switch (role.toLowerCase()) {
+    case 'owner & ceo':
+      return <Crown className="h-5 w-5 animate-pulse text-primary" />;
+    case 'founder & ceo':
+      return <Crown className="h-5 w-5 animate-bounce text-primary" />;
+    case 'lead developer':
+      return <Code className="h-5 w-5 animate-spin text-primary" />;
+    case 'community manager':
+      return <Users className="h-5 w-5 animate-pulse text-primary" />;
+    default:
+      return <Star className="h-5 w-5 animate-spin text-primary" />;
+  }
 };
 
-const SingleAdminCard: React.FC<AdminCardProps> = ({ name }) => {
-  const { t } = useTranslation();
+const getRoleBadgeColor = (role: string) => {
+  return 'bg-gradient-to-r from-primary/30 to-accent/30 text-primary border border-primary/40 shadow-[0_0_8px_2px_#5a6cff55]';
+};
 
-  // سحب البيانات من ملفات الترجمة بناءً على اللغة
-  const roleKey = `admins.${name}.role`;
-  const descriptionKey = `admins.${name}.description`;
-
-  const role = t(roleKey);
-  const description = t(descriptionKey);
-  const image = adminsData[name].image;
-  const socialLinks = adminsData[name].socialLinks;
-
+const AdminCard: React.FC<AdminCardProps> = ({ name, role, description, imageUrl }) => {
   return (
     <div
-      dir="rtl"
-      className="bg-[#0e0c1b] p-5 rounded-xl border border-purple-500
-                 shadow-[0_0_15px_rgba(155,89,182,0.2)]
-                 hover:shadow-[0_0_25px_rgba(155,89,182,0.4)]
-                 transition-all text-white"
+      className="relative rounded-3xl shadow-xl p-7 bg-gradient-to-br from-[#23242a] via-[#181a1f] to-[#23242a] border border-[#3b82f6]/30 group overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-[0_0_32px_4px_#3b82f6aa]"
     >
-      <div className="flex items-center gap-3 mb-4">
-        <img
-          src={image}
-          alt={name}
-          className="w-12 h-12 rounded-full object-cover border border-purple-400 shadow"
-        />
-        <div className="flex items-center gap-2">
-          <h3 className="text-lg font-bold">{name}</h3>
-          <Badge
-            icon={Star} // يمكنك تخصيص الأيقونة حسب الحاجة
-            className="flex items-center gap-1 px-2 py-0.5 text-sm rounded bg-purple-600 text-white"
-          >
-            {role}
-          </Badge>
+      {/* لمعة خفيفة أعلى البطاقة */}
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-2/3 h-2 rounded-b-full bg-gradient-to-r from-[#3b82f6]/40 via-white/10 to-[#5a6cff]/40 opacity-60 blur-sm z-10" />
+      {/* متدرج متحرك حول الصورة */}
+      <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-tr from-[#3b82f6] via-[#5a6cff] to-[#23242a] p-[3px] shadow-[0_0_24px_4px_#3b82f6bb] animate-gradient-spin group-hover:shadow-[0_0_32px_8px_#5a6cffcc] transition-all duration-300">
+        <div className="w-full h-full rounded-full bg-background-dark flex items-center justify-center overflow-hidden">
+          {imageUrl ? (
+            <img 
+              src={imageUrl} 
+              alt={name} 
+              className="w-full h-full object-cover rounded-full transition-transform duration-300 group-hover:scale-110" 
+            />
+          ) : (
+            <div className="text-3xl font-extrabold bg-gradient-to-r from-[#3b82f6] to-[#5a6cff] text-transparent bg-clip-text">
+              {name.charAt(0)}
+            </div>
+          )}
         </div>
       </div>
-      <p className="text-sm text-gray-300 leading-relaxed">{description}</p>
-
-      {/* عرض روابط مواقع التواصل الاجتماعي */}
-      <div className="flex gap-3 mt-3">
-        {socialLinks.twitter && (
-          <a
-            href={socialLinks.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaTwitter className="text-blue-500 hover:text-blue-600" />
-          </a>
-        )}
-        {socialLinks.github && (
-          <a
-            href={socialLinks.github}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaGithub className="text-gray-700 hover:text-gray-800" />
-          </a>
-        )}
-        {socialLinks.linkedin && (
-          <a
-            href={socialLinks.linkedin}
-            className="text-gray-500 hover:text-white transition-colors duration-200"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaLinkedin size={18} />
-          </a>
-        )}
+      <h3 className="text-2xl md:text-3xl font-extrabold text-center mb-1 drop-shadow-lg bg-gradient-to-r from-[#3b82f6] to-[#5a6cff] text-transparent bg-clip-text">
+        {name}
+      </h3>
+      <div className={`flex items-center justify-center gap-1 px-3 py-1 rounded-full mt-1 mb-3 bg-gradient-to-r from-[#23242a]/30 to-[#181a1f]/30 border border-[#3b82f6]/40 shadow-[0_0_8px_2px_#3b82f655] transition-all duration-300`}> 
+        {getRoleIcon(role)}
+        <span className="ml-1 font-bold uppercase tracking-wide text-sm bg-gradient-to-r from-[#3b82f6] to-[#5a6cff] text-transparent bg-clip-text">{role}</span>
       </div>
+      <p className="text-gray-100 text-center leading-relaxed font-medium">{description}</p>
+      {/* Glow effect */}
+      <div className="pointer-events-none absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-60 transition-all duration-300 blur-2xl bg-gradient-to-r from-[#3b82f6]/30 via-[#5a6cff]/20 to-[#23242a]/30 z-0" />
     </div>
   );
 };
 
-const AdminCard: React.FC = () => {
-  const admins = Object.keys(adminsData);
-
-  return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-      {admins.map((name) => (
-        <SingleAdminCard key={name} name={name} />
-      ))}
-    </section>
-  );
-};
-
 export default AdminCard;
+
+// tailwind animation
+// in tailwind.config.js add:
+// extend: { keyframes: { 'gradient-spin': { '0%': { backgroundPosition: '0% 50%' }, '100%': { backgroundPosition: '100% 50%' } } }, animation: { 'gradient-spin': 'gradient-spin 3s linear infinite' } }

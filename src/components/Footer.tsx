@@ -1,222 +1,92 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Separator } from "@/components/ui/separator";
-import { motion } from "framer-motion";
-import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Youtube,
-  Globe,
-} from "lucide-react";
+import { Youtube, Instagram, Twitter } from "lucide-react";
 import { SiTiktok, SiSnapchat, SiDiscord } from "react-icons/si";
-import { useTranslation } from "react-i18next";
+import { KickIcon } from "./icons/KickIcon";
 
-// مكون KickIcon يستخدم الشعار الرسمي من ويكيميديا
-const KickIcon: React.FC<React.ImgHTMLAttributes<HTMLImageElement>> = (
-  props
-) => (
-  <img
-    {...props}
-    src="https://www.svgrepo.com/show/204346/kickstarter.svg"
-    alt="Kick Logo"
-    className="w-6 h-6"
-  />
-);
-interface SocialItem {
-  icon: React.ReactNode;
-  url?: string;
-  email?: string;
-  label: string;
-}
+const Footer: React.FC = () => {
+  const socialLinks = [
+    { name: "YouTube", href: "https://www.youtube.com/@AbuSwe7l" },
+    { name: "Kick", href: "https://kick.com/abuswe7l" },
+    { name: "TikTok", href: "https://www.tiktok.com/@abuswe7ll" },
+    { name: "Instagram", href: "https://www.instagram.com/abuswe7l?igsh=MWZvbmFjeTE4dWd1cw==" },
+    { name: "Twitter", href: "https://x.com/ASwe7l" },
+    { name: "Snapchat", href: "https://www.snapchat.com/add/abuswe7l" },
+    { name: "Discord", href: "https://discord.gg/vx4UczGd" },
+  ];
 
-// قائمة الروابط الاجتماعية مع الأيقونات الصحيحة
-const socialLinks: SocialItem[] = [
-  { icon: <KickIcon />, label: "Kick", url: "https://kick.com/abuswe7l" },
-  {
-    icon: <Youtube className="w-6 h-6" />,
-    label: "YouTube",
-    url: "https://www.youtube.com/@AbuSwe7l",
-  },
-  {
-    icon: <SiDiscord className="w-6 h-6" />,
-    label: "Discord",
-    url: "https://discord.gg/ru4RXet4",
-  },
-  {
-    icon: <Instagram className="w-6 h-6" />,
-    label: "Instagram",
-    url: "https://www.instagram.com/abuswe7l",
-  },
-  {
-    icon: <SiTiktok className="w-6 h-6" />,
-    label: "TikTok",
-    url: "https://www.tiktok.com/@abuswe7ll",
-  },
-  {
-    icon: <Twitter className="w-6 h-6" />,
-    label: "Twitter",
-    url: "https://x.com/aswe7l",
-  },
-  {
-    icon: <SiSnapchat className="w-6 h-6" />,
-    label: "Snapchat",
-    url: "https://www.snapchat.com/add/abuswe7l",
-  },
-];
-
-export default function Footer() {
-  const { t } = useTranslation();
-  const year = new Date().getFullYear();
-
-  const desc = t("footer.description");
-  const quickItems = t("footer.quickLinks.items", {
-    returnObjects: true,
-  }) as string[];
-  const adminItems = t("footer.administration.items", {
-    returnObjects: true,
-  }) as string[];
-  const connect = t("footer.connect.items", { returnObjects: true }) as Array<{
-    label: string;
-    url?: string;
-    email?: string;
-  }>;
-  const copyright = t("footer.copyright", { year });
-  const privacy = t("footer.privacy");
+  const footerLinks = [
+    { href: "/terms-conditions", label: "Terms & Conditions" },
+    { href: "/admin-info", label: "Admin Info" },
+    { href: "/dashboard", label: "Dashboard" },
+  ];
 
   return (
-    <footer className="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white">
-      <div className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-          {/* Brand & Description */}
+    <footer className="w-full bg-background-dark border-t-2 border-primary/20">
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Logo and Description */}
           <div className="space-y-4">
-            <Link
-              to="/"
-              className="inline-flex items-center space-x-3 rtl:space-x-reverse"
-            >
+            <Link to="/" className="flex items-center space-x-3 group">
               <img
-                src="https://cdn.discordapp.com/avatars/1275574902736424971/80c19f39d0d484c5694658466ea36a2d.webp?size=4096"
-                alt="Logo"
-                className="w-8 h-8 rounded-full"
+                src="https://yt3.googleusercontent.com/6skf3aJYTrBh2Vz5MZ2qXaRvjUCxjkHtwZCTCTfSMZ95eSf7uPsDhdefIMGkyEHQeIPF474gIA=s900-c-k-c0x00ffffff-no-rj"
+                alt="AbuSwe7l Logo"
+                className="w-12 h-12 rounded-full border-2 border-primary shadow-[0_0_8px_2px_#0066ffcc] bg-background-dark"
               />
-              <span className="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-pink-400">
+              <span className="text-2xl font-bold text-white group-hover:text-primary transition-colors duration-200">
                 AbuSwe7l
               </span>
             </Link>
-
-            <p className="text-sm opacity-75">{desc}</p>
-
-            {/* Social Icons */}
-            <div className="flex flex-wrap gap-3 mt-4">
-              {socialLinks.map((item, i) => (
-                <motion.a
-                  key={i}
-                  href={item.url ? item.url : `mailto:${item.email}`}
-                  target={item.url ? "_blank" : undefined}
-                  rel={item.url ? "noopener noreferrer" : undefined}
-                  aria-label={item.label}
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  className="p-3 bg-white bg-opacity-10 backdrop-blur-sm rounded-full shadow-inner hover:bg-opacity-20 transition focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                >
-                  {item.icon}
-                </motion.a>
-              ))}
-            </div>
+            <p className="text-gray-400">
+              Your ultimate destination for gaming entertainment and community interaction
+            </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4">
-              {t("footer.quickLinks.heading")}
-            </h3>
-            <ul className="space-y-3 text-sm">
-              {quickItems.map((text, i) => (
-                <li key={i}>
-                  <motion.span
-                    whileHover={{ x: 5 }}
-                    className="inline-block hover:text-indigo-400 transition"
-                  >
-                    <Link to={`#${text.toLowerCase()}`}>{text}</Link>
-                  </motion.span>
-                </li>
-              ))}
+            <h3 className="text-xl font-bold text-white mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-primary transition-colors duration-200">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms-conditions" className="text-gray-400 hover:text-primary transition-colors duration-200">
+                  Terms & Conditions
+                </Link>
+              </li>
+              <li>
+                <Link to="/admin-info" className="text-gray-400 hover:text-primary transition-colors duration-200">
+                  Admins
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard" className="text-gray-400 hover:text-primary transition-colors duration-200">
+                  Dashboard
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Administration */}
+          {/* Contact Info */}
           <div>
-            <h3 className="font-semibold mb-4">
-              {t("footer.administration.heading")}
-            </h3>
-            <ul className="space-y-3 text-sm">
-              {adminItems.map((text, i) => (
-                <li key={i}>
-                  <motion.span
-                    whileHover={{ x: 5 }}
-                    className="inline-block hover:text-indigo-400 transition"
-                  >
-                    <Link to={i === 0 ? "/admin-info" : "/terms-conditions"}>
-                      {text}
-                    </Link>
-                  </motion.span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h3 className="font-semibold mb-4">
-              {t("footer.connect.heading")}
-            </h3>
-            <ul className="space-y-3 text-sm opacity-75">
-              {connect.map((item, i) => (
-                <li key={i} className="flex items-center space-x-2">
-                  {item.url ? (
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-indigo-400 transition"
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
-                    <span>
-                      {item.label}:{" "}
-                      <a
-                        href={`mailto:${item.email}`}
-                        className="hover:text-indigo-400 transition"
-                      >
-                        {item.email}
-                      </a>
-                    </span>
-                  )}
-                </li>
-              ))}
+            <h3 className="text-xl font-bold text-white mb-4">Contact Us</h3>
+            <ul className="space-y-2">
+              <li className="text-gray-400">
+                <span className="text-primary">Email:</span> saadas.yt@gmail.com
+              </li>
             </ul>
           </div>
         </div>
 
-        <Separator className="my-12 border-gray-700" />
-
-        {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row justify-between items-center text-xs opacity-75">
-          <p>{copyright}</p>
-          <div className="flex space-x-6 mt-4 sm:mt-0">
-            <Link
-              to="/terms-conditions"
-              className="hover:text-indigo-400 transition"
-            >
-              {adminItems[1]}
-            </Link>
-            <Link to="/privacy" className="hover:text-indigo-400 transition">
-              {privacy}
-            </Link>
-          </div>
+        {/* Copyright */}
+        <div className="mt-12 pt-8 border-t border-primary/20 text-center text-gray-400">
+          <p>&copy; {new Date().getFullYear()} AbuSwe7l. All rights reserved.</p>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

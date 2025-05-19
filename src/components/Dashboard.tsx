@@ -1,0 +1,1 @@
+<div className="min-h-screen bg-gradient-to-br from-[#23242a] to-[#181a1f]"> 

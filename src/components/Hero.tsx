@@ -1,67 +1,46 @@
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { FileText, Sparkles } from "lucide-react"
-import { FloatingPaper } from "@/components/floating-paper"
-import { RoboAnimation } from "@/components/robo-animation"
-import { useTranslation } from "react-i18next";
-import { useIsMobile } from "@/hooks/use-mobile";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Hero: React.FC = () => {
-  const isMobile = useIsMobile();
-  const { t } = useTranslation();
-
   return (
-    <div className="relative min-h-[calc(100vh-76px)] flex items-center">
-      {/* Floating papers background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <FloatingPaper count={6} />
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-                {" "}
-                AbuSwe7l Gaming
-              </span>
-            </h1>
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-gray-400 text-xl mb-8 max-w-2xl mx-auto"
+    <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#1e293b] to-[#23242a]">
+      {/* Background with gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background-dark via-background to-background-dark z-0"></div>
+      
+      {/* Content */}
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-[#60a5fa] to-[#1e40af] mb-6 tracking-tight drop-shadow-lg">
+          Welcome to{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#60a5fa] to-[#1e40af]">
+            AbuSwe7l
+          </span>
+        </h1>
+        
+        <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto drop-shadow">
+          Your ultimate destination for gaming entertainment and community interaction
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            to="https://discord.gg/vx4UczGd"
+            className="px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white rounded-xl font-bold text-lg hover:shadow-[0_0_20px_#0066ff] transition-all duration-300 transform hover:scale-105"
           >
-            AbuSwe7l is a content creator on the Kick platform and he is in Clan Power.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            Get Started
+          </Link>
+          
+          <Link
+            to="/terms-conditions"
+            className="px-8 py-4 bg-background-light/20 text-white rounded-xl font-bold text-lg border-2 border-primary hover:bg-primary/20 transition-all duration-300"
           >
-            <Button size={isMobile ? "default" : "lg"} className="bg-purple-600 hover:bg-purple-700 shadow-lg transition-all duration-300">
-            <a href="https://kick.com/abuswe7l" target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-1">
-              {t("hero.watch")}
-            </a>
-            </Button>
-            <Button size={isMobile ? "default" : "lg"} variant="outline" className="border-white/20 bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm shadow-md transition-all">
-              <a href="#streams" className="px-4 py-1">
-              {t("hero.latest")}
-            </a>
-            </Button>
-          </motion.div>
+            Learn More
+          </Link>
         </div>
       </div>
-
-      {/* Animated robot */}
-      <div className="absolute bottom-0 right-0 w-96 h-96">
-        <RoboAnimation />
-      </div>
+      
+      {/* Decorative elements */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#23242a] to-transparent"></div>
     </div>
-  )
-}
+  );
+};
+
 export default Hero;

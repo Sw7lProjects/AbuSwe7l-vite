@@ -1,16 +1,17 @@
 import type { Config } from "tailwindcss";
-const flowbiteReact = require("flowbite-react/plugin/tailwindcss");
+import { fontFamily } from "tailwindcss/defaultTheme";
+import flowbiteReact from "flowbite-react/plugin/tailwindcss";
+import tailwindAnimate from "tailwindcss-animate";
+import flowbite from "flowbite/plugin";
 
-export default {
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    // دعم مكونات Flowbite React
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
-    // دعم سكربتات Flowbite
     "node_modules/flowbite/**/*.js",
     ".flowbite-react\\class-list.json"
   ],
@@ -25,63 +26,121 @@ export default {
     },
     extend: {
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
+          DEFAULT: "#5a6cff",
+          dark: "#23243a",
+          light: "#b3c6ff",
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))'
+          DEFAULT: "#ff3d00",
+          dark: "#cc3100",
+          light: "#ff6d00",
         },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))'
+        background: {
+          DEFAULT: "#181a2a",
+          light: "#23243a",
+          dark: "#10111a",
         },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
+        gray: {
+          DEFAULT: "#8a8d9f",
+          light: "#bfc2d4",
+          dark: "#5a5d6d",
+        },
+        text: {
+          DEFAULT: "#e6e9f0",
+          secondary: "#bfc2d4",
+          muted: "#8a8d9f",
+        },
+        border: {
+          DEFAULT: "#0066ff",
+          light: "#3399ff",
+          dark: "#0044cc",
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
+          DEFAULT: "#b3c6ff",
+          light: "#ff6d00",
+          dark: "#cc3100",
+        },
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        foreground: 'hsl(var(--foreground))',
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))'
+          foreground: 'hsl(var(--popover-foreground))',
         },
         card: {
           DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))'
+          foreground: 'hsl(var(--card-foreground))',
         },
         sidebar: {
-          DEFAULT: 'hsl(var(--sidebar-background))',
-          foreground: 'hsl(var(--sidebar-foreground))',
-          primary: 'hsl(var(--sidebar-primary))',
-          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-          accent: 'hsl(var(--sidebar-accent))',
-          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-          border: 'hsl(var(--sidebar-border))',
-          ring: 'hsl(var(--sidebar-ring))'
+          DEFAULT: '#000022',
+          foreground: '#FFFFFF',
+          primary: '#0066ff',
+          'primary-foreground': '#FFFFFF',
+          accent: '#ff3d00',
+          'accent-foreground': '#FFFFFF',
+          border: '#000066',
+          ring: '#0066ff'
         },
         streamer: {
-          purple: '#6D28D9',
-          blue: '#3B82F6',
-          dark: '#121212',
-          light: '#F9FAFB',
-          accent: '#EC4899'
+          primary: '#0066ff',
+          secondary: '#ff3d00',
+          accent: '#3399ff',
+          dark: '#000022',
+          light: '#FFFFFF',
+          gradient: {
+            from: '#0066ff',
+            via: '#ff3d00',
+            to: '#000066'
+          }
         }
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
+        sm: 'calc(var(--radius) - 4px)',
+        full: '9999px'
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+      },
+      backgroundImage: {
+        'gradient-primary': 'linear-gradient(to bottom right, var(--tw-gradient-stops))',
+        'gradient-dark': 'linear-gradient(to bottom right, #000000, #1a1a1a, #000000)',
+        'gradient-mixed': 'linear-gradient(to bottom right, #0066ff, #ff3d00, #000066)',
+      },
+      boxShadow: {
+        'glow': '0 0 20px rgba(0, 102, 255, 0.2)',
+        'glow-lg': '0 0 30px rgba(0, 102, 255, 0.4)',
+        'glow-accent': '0 0 20px rgba(255, 61, 0, 0.2)',
+        'glow-accent-lg': '0 0 30px rgba(255, 61, 0, 0.4)',
+      },
+      animation: {
+        'pulse-glow': 'pulse-glow 2s infinite',
+        'fade-in': 'fade-in 0.5s ease-in-out',
+        'slide-up': 'slide-up 0.5s ease-out',
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'spin-slow': 'spin 8s linear infinite',
+        'float': 'float 3s ease-in-out infinite'
       },
       keyframes: {
+        'pulse-glow': {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(0, 102, 255, 0.2)' },
+          '50%': { boxShadow: '0 0 30px rgba(0, 102, 255, 0.4)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'slide-up': {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
         'accordion-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' }
@@ -90,19 +149,14 @@ export default {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' }
         },
-        'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 2px 0 rgba(109, 40, 217, 0.2)' },
-          '50%': { boxShadow: '0 0 10px 4px rgba(109, 40, 217, 0.4)' }
+        'float': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' }
         }
       },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'spin-slow': 'spin 8s linear infinite'
-      }      
     }
   },
-  plugins: [require("tailwindcss-animate"), // إضافة بلجن Flowbite
-  require("flowbite/plugin"), flowbiteReact],
+  plugins: [tailwindAnimate, flowbite, flowbiteReact, require("@tailwindcss/typography")],
 } satisfies Config;
+
+export default config;

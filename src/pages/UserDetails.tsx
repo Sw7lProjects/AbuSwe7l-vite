@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { users as usersData } from '../lib/data';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 const UserDetails = () => {
   const { id } = useParams();
@@ -16,21 +18,29 @@ const UserDetails = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-900 text-white">
-        <div className="text-center text-lg animate-pulse">⏳ Loading user data...</div>
+      <div className="min-h-screen bg-gradient-to-br from-[#23242a] to-[#181a1f] flex flex-col">
+        <Navigation />
+        <div className="flex-1 flex justify-center items-center">
+          <div className="text-center text-base sm:text-lg animate-pulse text-gradient">⏳ Loading user data...</div>
+        </div>
+        <Footer />
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-900 text-white">
-        <div className="text-center p-6 bg-gray-800 rounded-lg shadow-xl">
-          <h2 className="text-3xl font-semibold text-red-400 mb-4">❌ User not found</h2>
-          <Link to="/dashboard" className="text-blue-500 underline hover:text-blue-400 transition duration-200">
-            Back to Dashboard
-          </Link>
+      <div className="min-h-screen bg-gradient-to-br from-[#23242a] to-[#181a1f] flex flex-col">
+        <Navigation />
+        <div className="flex-1 flex justify-center items-center">
+          <div className="text-center p-4 sm:p-6 card-primary">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gradient mb-4">❌ User not found</h2>
+            <Link to="/dashboard" className="text-[#ff3d00] hover:text-[#ff6d00] transition duration-200">
+              Back to Dashboard
+            </Link>
+          </div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -40,44 +50,56 @@ const UserDetails = () => {
     : 'https://via.placeholder.com/150';
 
   return (
-    <div className="min-h-screen bg-gradient-to-tr from-gray-900 to-black text-white py-16 px-6">
-      <div className="max-w-4xl mx-auto bg-gray-800 p-10 rounded-2xl shadow-2xl">
-        <h1 className="text-4xl font-extrabold text-center text-indigo-400 mb-10">🧍‍♂️ User Details</h1>
+    <div className="min-h-screen bg-gradient-to-br from-[#23242a] to-[#181a1f] flex flex-col">
+      <Navigation />
+      <div className="h-20 md:h-28"></div>
+      <main className="flex-1 py-8 sm:py-16 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto card-primary p-6 sm:p-10">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-center text-gradient mb-6 sm:mb-10">🧍‍♂️ User Details</h1>
 
-        <div className="flex justify-center mb-10">
-          <img
-            src={avatarUrl}
-            alt="User Avatar"
-            className="w-36 h-36 rounded-full border-4 border-indigo-500 shadow-lg"
-          />
-        </div>
+          <div className="flex justify-center mb-6 sm:mb-10">
+            <img
+              src={avatarUrl}
+              alt="User Avatar"
+              className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full border-4 border-[#ff3d00] shadow-lg hover:shadow-[#ff3d00]/20 transition-all duration-300"
+            />
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
-          <p><span className="font-semibold text-indigo-300">🆔 ID:</span> {user.id}</p>
-          <p><span className="font-semibold text-indigo-300">👤 Username:</span> {user.username}</p>
-          <p><span className="font-semibold text-indigo-300">🌍 Global Name:</span> {user.globalName || 'N/A'}</p>
-          <p><span className="font-semibold text-indigo-300">📧 Email:</span> {user.email || 'N/A'}</p>
-          <p><span className="font-semibold text-indigo-300">📱 Phone:</span> {user.phone || 'N/A'}</p>
-          <p><span className="font-semibold text-indigo-300">🔐 Verified?</span> {user.verified ? '✅ Yes' : '❌ No'}</p>
-          <p><span className="font-semibold text-indigo-300">🛡️ MFA Enabled?</span> {user.mfaEnabled ? '🔒 Yes' : '🔓 No'}</p>
-          <p><span className="font-semibold text-indigo-300">🔞 NSFW Allowed?</span> {user.nsfwAllowed ? '✅ Yes' : '❌ No'}</p>
-          <p><span className="font-semibold text-indigo-300">📳 Mobile User?</span> {user.mobile ? '📱 Yes' : '❌ No'}</p>
-          <p><span className="font-semibold text-indigo-300">💻 Desktop User?</span> {user.desktop ? '🖥️ Yes' : '❌ No'}</p>
-          <p><span className="font-semibold text-indigo-300">🤖 Bot?</span> {user.bot ? '✅ Yes' : '❌ No'}</p>
-          <p><span className="font-semibold text-indigo-300">🧬 System User?</span> {user.system ? '✅ Yes' : '❌ No'}</p>
-        </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-base sm:text-lg">
+            <InfoItem label="🆔 ID" value={user.id} />
+            <InfoItem label="👤 Username" value={user.username} />
+            <InfoItem label="🌍 Global Name" value={user.globalName || 'N/A'} />
+            <InfoItem label="📧 Email" value={user.email || 'N/A'} />
+            <InfoItem label="📱 Phone" value={user.phone || 'N/A'} />
+            <InfoItem label="🔐 Verified" value={user.verified ? '✅ Yes' : '❌ No'} />
+            <InfoItem label="🛡️ MFA Enabled" value={user.mfaEnabled ? '🔒 Yes' : '🔓 No'} />
+            <InfoItem label="🔞 NSFW Allowed" value={user.nsfwAllowed ? '✅ Yes' : '❌ No'} />
+            <InfoItem label="📳 Mobile User" value={user.mobile ? '📱 Yes' : '❌ No'} />
+            <InfoItem label="💻 Desktop User" value={user.desktop ? '🖥️ Yes' : '❌ No'} />
+            <InfoItem label="🤖 Bot" value={user.bot ? '✅ Yes' : '❌ No'} />
+            <InfoItem label="🧬 System User" value={user.system ? '✅ Yes' : '❌ No'} />
+          </div>
 
-        <div className="mt-12 text-center">
-          <Link
-            to="/dashboard"
-            className="inline-block px-6 py-3 bg-indigo-600 text-white rounded-full hover:bg-indigo-500 transition duration-300"
-          >
-            ⬅️ Back to Dashboard
-          </Link>
+          <div className="mt-8 sm:mt-12 text-center">
+            <Link
+              to="/dashboard"
+              className="modern-button inline-flex items-center text-sm sm:text-base"
+            >
+              ⬅️ Back to Dashboard
+            </Link>
+          </div>
         </div>
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 };
+
+const InfoItem = ({ label, value }: { label: string; value: string | number }) => (
+  <div className="bg-gradient-to-br from-[#ff3d00]/10 to-[#ff6d00]/10 rounded-lg p-3 sm:p-4">
+    <span className="font-semibold text-gradient text-sm sm:text-base">{label}:</span>
+    <span className="ml-2 text-white text-sm sm:text-base">{value}</span>
+  </div>
+);
 
 export default UserDetails;
